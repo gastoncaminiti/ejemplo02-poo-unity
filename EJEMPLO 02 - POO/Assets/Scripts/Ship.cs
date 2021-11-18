@@ -11,11 +11,12 @@ public class Ship : MonoBehaviour
     [SerializeField] private int damagePoints;
     [SerializeField] private int shootCooldown = 2;
 
-    [SerializeField] private float speedShip;
-    [SerializeField] private float distanceRay = 10f;
-    [SerializeField] private float timerShoot = 0;
+    [SerializeField] protected float speedShip;
+    [SerializeField] private   float distanceRay = 10f;
+    [SerializeField] private   float timerShoot = 0;
+    [SerializeField] private   float forcePower = 5;
 
-    [SerializeField] private shipTypes shitType;
+    [SerializeField] private shipTypes shipType;
     [SerializeField] private shipTypes targetType;
 
     [SerializeField] private GameObject munitionPrefab;
@@ -78,10 +79,10 @@ public class Ship : MonoBehaviour
 
     public shipTypes GetTargetType()
     {
-        return targetType;
+        return shipType;
     }
 
-   private void BroadcastRaycast(Transform origen)
+   protected void BroadcastRaycast(Transform origen)
    {
         RaycastHit hit;
         int layerMask = 1 << 31;
@@ -90,18 +91,17 @@ public class Ship : MonoBehaviour
         if (Physics.Raycast(origen.position, origen.TransformDirection(Vector3.forward), out hit, distanceRay,layerMask))
         {
             Ship t = hit.transform.gameObject.GetComponent<Ship>();
-            Debug.Log("SHOOT");
             if ((t != null) && (t.GetTargetType() == targetType))
             {
                 canShoot = false;
                 timerShoot = 0;
                 GameObject b = Instantiate(munitionPrefab, origen.position, munitionPrefab.transform.rotation);
-                b.GetComponent<Rigidbody>().AddForce(origen.TransformDirection(Vector3.forward) * 3f, ForceMode.Impulse);
+                b.GetComponent<Rigidbody>().AddForce(origen.TransformDirection(Vector3.forward) * forcePower, ForceMode.Impulse);
             }
         }
     }
 
-   private void DrawRay(Transform origen)
+  protected void DrawRay(Transform origen)
     {
         Gizmos.color = Color.blue;
         Vector3 direction = origen.TransformDirection(Vector3.forward) * distanceRay;
@@ -113,6 +113,23 @@ public class Ship : MonoBehaviour
         DrawRay(originOne.transform);
    }
 
+    //METODO PARA MIRAR OBJETO CON LERP
+    protected void LookAtLerp(GameObject lookObject)
+    {
+        Quaternion newRotation = Quaternion.LookRotation(lookObject.transform.position - transform.position);
+        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, 1f * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Munition"))
+        {
+            DealDamage(damagePoints);
+            Destroy(collision.gameObject);
+
+        }
+    }
+
     void OnDrawGizmos()
     {
         if (canShoot)
@@ -120,4 +137,5 @@ public class Ship : MonoBehaviour
             DrawRaycast();
         }
     }
+
 }
