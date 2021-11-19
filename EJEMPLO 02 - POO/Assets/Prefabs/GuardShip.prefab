@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2454786880918903948}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 3373282400321124581}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &2230738188908530067
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -117,12 +117,12 @@ MonoBehaviour:
   shieldPoints: 75
   damagePoints: 26
   shootCooldown: 2
-  speedShip: 4
+  speedShip: 20
   distanceRay: 10
   timerShoot: 2
   forcePower: 5
   shipType: 2
-  targetType: 1
+  targetType: 3
   munitionPrefab: {fileID: 8305088273392126967, guid: 1d76d6e08b76263418fa85bf59558dd9, type: 3}
   originOne: {fileID: 3373282399327653696}
   canShoot: 1

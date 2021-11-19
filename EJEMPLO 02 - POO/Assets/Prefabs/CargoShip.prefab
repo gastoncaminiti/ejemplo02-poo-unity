@@ -102,13 +102,13 @@ MonoBehaviour:
   hpPoints: 100
   shieldPoints: 30
   damagePoints: 25
-  shootCooldown: 4
-  speedShip: 3
+  shootCooldown: 5
+  speedShip: 2
   distanceRay: 20
   timerShoot: 0
-  forcePower: 5
+  forcePower: 4
   shipType: 1
-  targetType: 1
+  targetType: 3
   munitionPrefab: {fileID: 8305088273392126967, guid: 1d76d6e08b76263418fa85bf59558dd9, type: 3}
   originOne: {fileID: 3621313164913854056}
   canShoot: 1

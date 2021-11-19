@@ -20,7 +20,7 @@ public class Ship : MonoBehaviour
     [SerializeField] private shipTypes targetType;
 
     [SerializeField] private GameObject munitionPrefab;
-    [SerializeField] private GameObject originOne;
+    [SerializeField] protected GameObject originOne;
 
     public bool canShoot = true;
 
@@ -93,10 +93,7 @@ public class Ship : MonoBehaviour
             Ship t = hit.transform.gameObject.GetComponent<Ship>();
             if ((t != null) && (t.GetTargetType() == targetType))
             {
-                canShoot = false;
-                timerShoot = 0;
-                GameObject b = Instantiate(munitionPrefab, origen.position, munitionPrefab.transform.rotation);
-                b.GetComponent<Rigidbody>().AddForce(origen.TransformDirection(Vector3.forward) * forcePower, ForceMode.Impulse);
+                InstantiateMunition(origen);
             }
         }
     }
@@ -129,6 +126,15 @@ public class Ship : MonoBehaviour
 
         }
     }
+
+    protected void InstantiateMunition(Transform origen)
+    {
+        canShoot = false;
+        timerShoot = 0;
+        GameObject b = Instantiate(munitionPrefab, origen.position, munitionPrefab.transform.rotation);
+        b.GetComponent<Rigidbody>().AddForce(origen.TransformDirection(Vector3.forward) * forcePower, ForceMode.Impulse);
+    }
+
 
     void OnDrawGizmos()
     {
