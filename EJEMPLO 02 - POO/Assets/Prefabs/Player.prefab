@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 5995081675416751813}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,15 +207,15 @@ MonoBehaviour:
   hpPoints: 300
   shieldPoints: 200
   damagePoints: 30
-  shootCooldown: 2
+  shootCooldown: 1
   speedShip: 10
   distanceRay: 10
   timerShoot: 0
-  forcePower: 10
+  forcePower: 70
   shipType: 3
   targetType: 0
   munitionPrefab: {fileID: 2808370356241793098, guid: 89e4061c2c694c94fb325a631a999b36, type: 3}
   originOne: {fileID: 5995081675515845788}
   canShoot: 1
   originTwo: {fileID: 5995081676375478125}
-  rotationSpeed: 20
+  rotationSpeed: 45
